@@ -1,0 +1,20 @@
+Situation
+
+Cleaned order data reports revenue of ₹97,358.30, compared with
+₹99,860.20 from the raw SQL layer. The reconciliation difference is
+₹2,501.90.
+
+Complication
+
+COD has the highest return rate at 44.4%, compared with 14.7%
+for CARD and 18.9% for UPI. The highest-risk segment is
+COD with City Tier 2, at
+54.5%. The apparent revenue peak in 2026-01 was
+₹29,582.10, but quantity-outlier correction reduces it to
+₹11,637.10.
+
+Resolution
+
+The corrected analysis identifies 2026-03 as the true revenue peak at
+₹20,318.90. Operations and finance should prioritize the COD and
+Tier-2 risk segment while using the cleaned revenue figures for decision-making.
