@@ -61,7 +61,9 @@ Raw CSV Data
 | SCR Narrative       |
 | Offline Fallback    |
 +---------------------+
-Data Integrity Principle
+
+
+## Data Integrity Principle
 
 No layer reports a number that it did not compute itself or receive from the preceding layer.
 
