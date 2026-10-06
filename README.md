@@ -1,86 +1,65 @@
-# growth-intelligence-pipeline-Harshkumar
+# Growth Intelligence Pipeline
 
-A connected, end-to-end retail analytics pipeline built as a capstone project for the E&ICT Academy IIT Roorkee.
+A connected 3-layer data analytics and GenAI pipeline built for a Mamaearth-style retail growth analytics scenario.
 
-The project analyzes retail growth, revenue, customer behavior, product performance, and returns using a three-layer pipeline:
-
-**SQL → Python → GenAI Narrator**
-
-The central business question is:
-
-> **Are product returns eating into revenue and growth, and what should regional operations and finance teams pay attention to?**
+The project analyzes customer, product, and order data to understand revenue performance, returns, data-quality issues, high-risk customer segments, and monthly revenue trends. The final layer converts verified analytical findings into a business narrative using Gemini with a fully deterministic offline fallback.
 
 ---
 
 ## Project Objective
 
-The goal of this project is to build a reproducible analytics pipeline where each layer depends on the output of the previous layer.
+The objective of this project is to build a reliable analytics pipeline that answers key business questions around:
 
-The pipeline is designed around three stages:
+- Revenue performance
+- Customer and product behavior
+- Return rates
+- Payment-method risk
+- City-tier risk
+- Data-quality issues
+- Quantity outliers
+- Monthly revenue trends
+- Revenue reconciliation
+- AI-powered business interpretation
 
-1. **SQL Analytics**
-   - Load and query raw retail data
-   - Calculate revenue, order metrics, customer rankings, category performance, and return rates
-   - Validate data quality through SQL
-
-2. **Python Analytics**
-   - Clean and standardize the raw data
-   - Remove duplicate transactions
-   - Handle missing values
-   - Detect quantity outliers
-   - Perform segmentation, correlation analysis, and monthly revenue analysis
-   - Generate visualizations
-
-3. **GenAI Narrator**
-   - Consume verified findings from the Python layer
-   - Generate a management-friendly narrative
-   - Prevent the AI from inventing or modifying numerical findings
-   - Provide an offline fallback when an API key or network connection is unavailable
+The pipeline is designed for regional operations and finance teams who need trustworthy, reproducible insights.
 
 ---
 
-## Important Data Integrity Rule
+## Pipeline Architecture
 
-Each layer must only report numbers that it either:
-
-- computed itself, or
-- received from the immediately preceding layer.
-
-No layer is allowed to invent, manually modify, or independently recreate figures that belong to another layer.
-
-The raw CSV files are preserved exactly as supplied.
-
-All data cleaning is performed programmatically in Python.
-
----
-
-## Repository Structure
+The project contains three connected layers:
 
 ```text
-Growth-Intelligence-Pipeline/
-│
-├── README.md
-├── requirements.txt
-│
-├── sql/
-│   ├── schema.sql
-│   ├── seed_data.sql
-│   └── reports.sql
-│
-├── data/
-│   ├── customers.csv
-│   ├── products.csv
-│   └── orders.csv
-│
-├── analysis/
-│   ├── clean_and_eda.py
-│   └── visualize.py
-│
-├── visualizations/
-│   ├── return_rate_by_payment.png
-│   └── monthly_revenue_trend.png
-│
-└── narrator/
-    ├── findings.json
-    ├── generate_narrative.py
-    └── sample_output.txt
+Raw CSV Data
+     │
+     ▼
+┌─────────────────────┐
+│     PART 1 - SQL    │
+│                     │
+│ Schema + Seed Data  │
+│ Business Reports    │
+└─────────┬───────────┘
+          │
+          │ Verified SQL figures
+          ▼
+┌─────────────────────┐
+│   PART 2 - PYTHON   │
+│                     │
+│ Cleaning + EDA      │
+│ Reconciliation      │
+│ Outlier Analysis    │
+│ Segmentation        │
+│ Correlation         │
+│ Visualizations      │
+└─────────┬───────────┘
+          │
+          │ Verified findings
+          ▼
+┌─────────────────────┐
+│  PART 3 - GENAI     │
+│                     │
+│ findings.json       │
+│ Gemini Narrator     │
+│ SCR Narrative       │
+│ Offline Fallback    │
+└─────────────────────┘
